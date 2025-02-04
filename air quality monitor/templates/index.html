@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Current Air Quality</h1>
+<div class="card">
+    <p id="current-data">Loading...</p>
+</div>
+
+<script>
+    async function fetchCurrentData() {
+        let response = await fetch("/api/current");
+        let data = await response.json();
+        document.getElementById("current-data").innerHTML = `
+            <strong>MQ-7:</strong> ${data.field1} ppm |
+            <strong>MQ-135:</strong> ${data.field2} ppm |
+            <strong>Dust:</strong> ${data.field3} µg/m³
+        `;
+    }
+
+    fetchCurrentData();
+    setInterval(fetchCurrentData, 5000);
+</script>
+{% endblock %}

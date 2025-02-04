@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Air Quality Prediction</h1>
+<div class="card">
+    <p><strong>Predicted Dust Levels:</strong> <span id="predicted-dust">Loading...</span> µg/m³</p>
+</div>
+
+<script>
+    async function fetchPrediction() {
+        let response = await fetch("/api/predict");
+        let data = await response.json();
+        
+        if (data.error) {
+            document.getElementById("predicted-dust").innerText = "Error: " + data.error;
+        } else {
+            document.getElementById("predicted-dust").innerText = data.predicted_dust ;
+        }
+    }
+
+    fetchPrediction();
+    setInterval(fetchPrediction, 60000); // Update every 60 seconds
+</script>
+{% endblock %}

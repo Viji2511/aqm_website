@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Quality Monitoring</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v=2">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/darkmode.js') }}?v=2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">Air Quality Monitor</h1>
+            <ul class="nav-tabs">
+                <li><a href="{{ url_for('index') }}" class="tab">Current Air Quality</a></li>
+                <li><a href="{{ url_for('past_analysis') }}" class="tab">Past Analysis</a></li>
+                <li><a href="{{ url_for('prediction') }}" class="tab">Prediction</a></li>
+                <li><a href="{{ url_for('about') }}" class="tab">About</a></li>
+                <li><button id="dark-mode-toggle">🌙</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content Block -->
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
